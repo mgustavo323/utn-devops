@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+  apache:
+    image: httpd:2.4
+    container_name: apache
+    volumes:
+      - "/var/www/unidad-2-utn/front:/usr/local/apache2/htdocs/"    
+      - "./configs/httpd/devops.site.conf:/usr/local/apache2/conf/httpd.conf"
+    ports:
+      - "8080:80"
+    depends_on:
+      - nodejs
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - app-network
+#-------------------------------------------------------------
+  nodejs:
+    image: node:alpine
+    container_name: node
+    environment: 
+      NODE_ENV: production
+    working_dir: /home/app
+#    restart: always
+    volumes:
+      - /var/www/unidad-2-utn/back:/home/app
+    ports:
+      - "3500:3500"
+    depends_on:
+      - db_server
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - app-network
+    command: sh -c "npm install && node api.js"
+#-------------------------------------------------------------  
+  db_server:
+    image: mysql/mysql-server:8.0.23
+    container_name: mysql
+    environment:
+      - MYSQL_DATABASE=dwh #creará una base de datos con ese nombre
+      - MYSQL_ROOT_PASSWORD=meolvide #clave de administrador del servidor MySQL
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - "./configs/mysql:/docker-entrypoint-initdb.d/:ro"
+    networks:
+      - app-network
+volumes:
+  db_data:
+    driver: local
+networks:
+  app-network:
+    driver: bridge

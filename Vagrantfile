@@ -12,8 +12,7 @@ Vagrant.configure("2") do |config|
   
   #Si se ejecuta sobre macOS se configura otra imagen
   if Vagrant::Util::Platform::architecture == 'arm64' 
-    #box = "bento/ubuntu-22.04-arm64"
-    box = "bento/ubuntu-22.04"
+    box = "bento/ubuntu-22.04-arm64"
   else
     config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install -y virtualbox-guest-x11"
   end
@@ -24,13 +23,14 @@ Vagrant.configure("2") do |config|
   config.vm.box = box
 
   # Redirecciono puertos desde la maquina virtual a la maquina real. Por ejemplo
-  # del puerto 80 (web) de la maquina virtual con Debian se podrá acceder a través
+  # del puerto 8081 (web) de la maquina virtual se podrá acceder a través
   # del puerto 8081 de nuestro navegador.
   # Esto se realiza para poder darle visibilidad a los puertos de la maquina virtual
   # y además para que no se solapen los puertos con los de nuestra equipo en el caso de que
   # ese número de puerto este en uso.
-  #config.vm.network "forwarded_port", guest: 80, host: 8081
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
+  config.vm.network "forwarded_port", guest: 3500, host: 3500, auto_correct: true
+  config.vm.network "forwarded_port", guest: 3306, host: 3306, auto_correct: true
 
   #Permite descargas con certificados vencidos o por http
   config.vm.box_download_insecure = true
@@ -57,13 +57,11 @@ Vagrant.configure("2") do |config|
   end
 
 
-  # Copia el archivo de configuración del servidor web. Este comando transfiere un archivo desde la maquina host
-  # a la maquina cliente
-  config.vm.provision "file", source: "Configs/devops.site.conf", destination: "/tmp/devops.site.conf"
+  # Este comando transfiere un archivo desde la maquina host a la maquina cliente. 
+  # Es para permitir el redireccionamiento de tráfico entre el máquina host y la vm
+  config.vm.provision "file", source: "hostConfigs/ufw", destination: "/tmp/ufw"
 
   # En este archivo tendremos el provisionamiento de software necesario para nuestra
   # maquina virtual. Por ejemplo, servidor web, servidor de base de datos, etc.
   config.vm.provision :shell, path: "Vagrant.bootstrap.sh", run: "always"
-
-
 end
