@@ -96,7 +96,7 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id_contact`, `fname`, `lname`, `position`, `email`, `id_company`, `id_city`, `address`, `interest`, `account_phone`, `preference_phone`, `account_whatsapp`, `preference_whatsapp`, `account_instagram`, `preference_instagram`, `account_facebook`, `preference_facebook`, `account_linkedin`, `preference_linkedin`, `active`) VALUES
-(3, 'Leonardo', 'Nieva', 'Sysadmin', 'lnieva@acamica.com', 1, 2, 'Tacuari 1842', 75, '46325589', 1, '', 2, '@nieva', 3, 'nieva', 3, 'leonardo.nieva', 2, 1),
+(3, 'Leonardo', 'Saenz', 'Sysadmin', 'lnieva@acamica.com', 1, 2, 'Caseros 1842', 75, '46325589', 1, '', 2, '@nieva', 3, 'nieva', 3, 'leonardo.saenz', 2, 1),
 (4, 'Clo', 'Tilde', 'Aseguradora', 'clo.tilde@hotmial.com', 2, 12, 'Lima 50', 75, '', 1, '', 1, '', 1, '', 1, '', 1, 1),
 (5, 'Papi', 'llon', 'Operario', 'papi.llon@gmail.com', 2, 14, 'San Martin 6200', 100, '', 1, '', 1, '', 1, '', 1, '', 1, 1),
 (7, 'Juan', 'Chon', 'Contador', 'juanchon@pepe.com', 3, 11, 'San Martin 620', 50, '', 1, '1123695588', 2, '', 1, '', 1, '', 1, 1);
@@ -187,7 +187,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `fname`, `lname`, `email`, `pass`, `admin`, `active`) VALUES
-(1, 'UTN', 'Admin', 'admin@utm.com', 'meolvide', 1, 1),
+(1, 'UTN', 'Admin', 'admin@utn.com', 'meolvide', 1, 1),
 (2, 'Juan Carlos', 'Cal', 'juancacal@gmail.com', 'meolvide', 0, 1);
 
 --
