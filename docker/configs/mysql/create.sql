@@ -58,7 +58,7 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id_company`, `name`, `address`, `email`, `phone`, `id_city`, `active`) VALUES
-(1, 'Agea', 'Tacuari 1842', 'agea@agea.com.ar', '1122554685', 2, 1),
+(1, 'Sga', 'Caseros 1842', 'sga@sa.com.ar', '1122554685', 2, 1),
 (2, 'Triunfo Seguros', 'Cerrito 125', 'administracion@triunfoseguros.com', '4569623542', 2, 1),
 (3, 'Santander Rio', 'Colon 15', 'consulta@santanderrio.com.ar', '256633251', 8, 1);
 
@@ -187,7 +187,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `fname`, `lname`, `email`, `pass`, `admin`, `active`) VALUES
-(1, 'Leonardo', 'Nieva', 'lnieva@acamica.com', 'meolvide', 1, 1),
+(1, 'UTN', 'Admin', 'admin@utm.com', 'meolvide', 1, 1),
 (2, 'Juan Carlos', 'Cal', 'juancacal@gmail.com', 'meolvide', 0, 1);
 
 --
